@@ -6,9 +6,13 @@
     <title>Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="lib/css/dash.css">
-    <script src="lib/js/dash.css"></script>
+    <script src="lib/js/dash.js"></script>
 </head>
 <body>
-    
+    <form onsubmit="signIn()">
+        Login: <input type="text" id="email"> <br />
+        Password: <input type="password" id="password">
+        <button type="submit">Login</button>
+    </form>
 </body>
 </html>
