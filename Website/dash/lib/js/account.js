@@ -1,6 +1,7 @@
 // Initialisation
-var d = new Date(0);
-var uID = "2vlMo1eTAwSVbptjBUuT"
+var d = new Date(0);var cook = document.cookie;
+console.log("cook")
+var uID = cook.split("=")[1]
 var table = document.getElementById("requests");
 var config = {
     apiKey: "AIzaSyAUj5V7i-0jPFfwd4DnTryT5fPGxlxThGE",
