@@ -1,7 +1,8 @@
 // Initialisation
 var d = new Date(0);
 var uID = "2vlMo1eTAwSVbptjBUuT"
-var table = document.getElementById("requests");
+var tableR = document.getElementById("requests");
+var tableI = document.getElementById("interviews")
 var config = {
     apiKey: "AIzaSyAUj5V7i-0jPFfwd4DnTryT5fPGxlxThGE",
     authDomain: "project-engine-5cb03.firebaseapp.com",
@@ -25,6 +26,9 @@ user.get().then(function(doc) {
 var coll = db.collection("nannies").doc(uID).collection("requests");
 coll.get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
+        if (doc.data().interview == true) {
+            table = tableI
+        } else {table = tableR}
         var row = table.insertRow(1);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
@@ -40,11 +44,11 @@ coll.get().then((querySnapshot) => {
         }
         reqLat = doc.data().location.latitude.toString();
         reqLon = doc.data().location.longitude.toString();
-        reqLoc = reqLat + ", " + reqLon
+        reqLoc = reqLat + "," + reqLon
         reqDate = new Date(doc.data().date.seconds * 1000).toString().split("GMT")[0];
         cell1.innerHTML = reqDate;
         cell2.innerHTML = '<span id="' + doc.id + '">' + reqFill + '</span>';
-        cell3.innerHTML = reqLoc;
+        cell3.innerHTML = '<a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination='+reqLoc+'">'+reqLoc+'</a>';
         cell4.innerHTML = '<a><i onclick="acceptJob(\'' + doc.id + '\')" class="fas fa-check-circle"></i></a>'
     });
 });
