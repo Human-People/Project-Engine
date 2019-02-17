@@ -45,6 +45,7 @@
                                         Settings
                                     </a>
                                     <div class="navbar-dropdown">
+                                        <a class="navbar-item" id="darkToggle" onclick="dark()">Dark Mode: Off</a>
                                         <a class="navbar-item" id="devToggle" onclick="devToggle()">Dev Mode: On</a>
                                         <a class="navbar-item" href="settings.html">
                                         Settings
@@ -53,7 +54,7 @@
                                         Account
                                         </a>
                                         <hr class="navbar-divider">
-                                        <a class="navbar-item" onclick="signOut()">
+                                        <a class="navbar-item" id="signOut" onclick="return signOut()">
                                         Sign out
                                         </a>
                                     </div>

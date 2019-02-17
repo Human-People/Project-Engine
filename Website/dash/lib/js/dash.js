@@ -1,6 +1,7 @@
 var devMode = true; 
+var darkMode = false; 
 
-function signIn(email, password) {
+function signIn() {
     var email = document.forms["login"]["email"]
     var password = document.forms["login"]["password"]
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
@@ -10,7 +11,13 @@ function signIn(email, password) {
         var errorMessage = error.message;
         console.log(errorCode, ",", errorMessage)
         console.log("Working?")
-    });}
+    });};
+
+function signOut() {
+    document.cookie = "uID=";
+    document.location.href = "index.html";
+    return false; 
+}
 
 function devToggle() {
     if (devMode == true) {
