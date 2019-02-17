@@ -22,5 +22,6 @@ hr {
 
 #flexCont {
     display: flex;
+    justify-content: space-between;
 }
 

@@ -2,10 +2,6 @@
 var d = new Date(0);
 var uID = "2vlMo1eTAwSVbptjBUuT"
 var table = document.getElementById("requests");
-// User ID
-document.getElementById("uID").innerText = "User ID: " + uID
-
-// Firebase 
 var config = {
     apiKey: "AIzaSyAUj5V7i-0jPFfwd4DnTryT5fPGxlxThGE",
     authDomain: "project-engine-5cb03.firebaseapp.com",
@@ -16,6 +12,16 @@ var config = {
 };
 firebase.initializeApp(config);
 var db = firebase.firestore();
+var user = db.collection("nannies").doc(uID)
+// User Details
+document.getElementById("uID").innerText = "User ID: " + uID;
+user.get().then(function(doc) {
+    console.log(doc.data)
+    document.getElementById("profilePic").src = doc.data().img;
+    document.getElementById("uFirstName").innerText = doc.data().name;
+    document.getElementById("uDesc").innerText = doc.data().desc;
+});
+// Firebase 
 var coll = db.collection("nannies").doc("2vlMo1eTAwSVbptjBUuT").collection("requests");
 coll.get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {

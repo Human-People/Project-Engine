@@ -66,20 +66,25 @@
     </section>
     <div id="flexCont">
         <section class="section" id="jobsTable">
-                <table class="table" id="requests">
-                    <thead>
-                        <th>Request Date</th>
-                        <th>Request Fufilled?</th>
-                        <th>Location</th>
-                        <th>Fulfil</th>
-                    </thead>
-                </table>
+            <div class="box">
+                <h2 class="title is-2">Your Jobs</h2>
+                    <table class="table" id="requests">
+                        <thead>
+                            <th>Request Date</th>
+                            <th>Request Accepted?</th>
+                            <th>Location</th>
+                            <th>Accept</th>
+                        </thead>
+                    </table>
+                </div>
         </section>
         <section class="section" id="profile">
-            <h2>Your Profile</h2>
-            <img src="<!--TODO: Implement this -->">
-            <span id="uFirstName"></span>
-            <span id="uDesc"></span>
+            <div class="box">
+                <h2 class="title is-2">Your Profile</h2>
+                <img src="<!--TODO: Implement this -->" id="profilePic"> <br />
+                <span id="uFirstName"></span> <br />
+                <span id="uDesc"></span>
+            </div>
         </section>
     </div>
         <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
