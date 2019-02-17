@@ -22,7 +22,7 @@ user.get().then(function(doc) {
     document.getElementById("uDesc").innerText = doc.data().desc;
 });
 // Firebase 
-var coll = db.collection("nannies").doc("2vlMo1eTAwSVbptjBUuT").collection("requests");
+var coll = db.collection("nannies").doc(uID).collection("requests");
 coll.get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
         var row = table.insertRow(1);
@@ -33,7 +33,7 @@ coll.get().then((querySnapshot) => {
         console.log("Document data:", doc.data());
         fulish = doc.data().fufilled; 
         console.log(fulish)
-        if (fulish == "true") {
+        if (fulish == true) {
             reqFill = "Yes"
         } else {
             reqFill = "No"
@@ -43,8 +43,18 @@ coll.get().then((querySnapshot) => {
         reqLoc = reqLat + ", " + reqLon
         reqDate = new Date(doc.data().date.seconds * 1000).toString().split("GMT")[0];
         cell1.innerHTML = reqDate;
-        cell2.innerHTML = reqFill;
+        cell2.innerHTML = '<span id="' + doc.id + '">' + reqFill + '</span>';
         cell3.innerHTML = reqLoc;
-        cell4.innerHTML = '<a href="fufil.html"><i class="fas fa-check-circle"></i></a>'
+        cell4.innerHTML = '<a><i onclick="acceptJob(\'' + doc.id + '\')" class="fas fa-check-circle"></i></a>'
     });
 });
+
+function acceptJob(dID) {
+    console.log("Firing")
+    console.log(dID)
+    var docc = db.collection("nannies").doc(uID).collection("requests").doc(dID)
+    var acception = docc.set({
+        fufilled: true
+    }, { merge: true });
+    document.getElementById(dID).innerText = "Yes";
+}
