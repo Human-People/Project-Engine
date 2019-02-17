@@ -214,10 +214,50 @@ class InfoState extends State<InfoScreen>{
           ),
           ListTile(
             title: Text("DBS Checked:"),
-            trailing: ,
+            trailing: widget.document["dbs"] == true ? Text("Yes", style: TextStyle(color: Colors.green)) : Text("No", style: TextStyle(color: Colors.redAccent))
           ),
+          ListTile(
+            leading: FlatButton(
+              child: Text("Book Interview"),
+              onPressed: () => setInterview(context, widget.location, widget.document, true)
+            ),
+            trailing: FlatButton(
+              child: Text("Book a session"),
+              onPressed: () => setInterview(context, widget.location, widget.document, false)
+            ),
+          )
         ]
       )
     );
+  }
+
+  setInterview(BuildContext context, location, DocumentSnapshot document, bool type) async{
+    DateTime appointmentDay = await showDatePicker(
+      firstDate: DateTime.now(), 
+      lastDate: DateTime(DateTime.now().year+1), 
+      initialDate: DateTime.now(), 
+      context: context, 
+      initialDatePickerMode: DatePickerMode.day);
+
+    TimeOfDay appointmentTime = await showTimePicker(
+      initialTime: TimeOfDay.now(), 
+      context: context);
+
+    GeoPoint geoPoint = GeoPoint(location["latitude"], location["longitude"]);
+
+    DateTime appointment = DateTime.utc(appointmentDay.year, appointmentDay.month, appointmentDay.day, appointmentTime.hour, appointmentTime.hour);
+
+    TimeOfDay appointEnd = type == true ? appointmentTime : await showTimePicker(
+      initialTime: appointmentTime,
+      context: context
+    );
+
+    Duration lengthApp = DateTime(appointment.year, appointment.month, appointment.day, appointEnd.hour, appointEnd.minute).difference(appointment);
+
+
+
+    num charge = type == true ? 0 : document["hour"] * lengthApp.inHours.toDouble();
+
+    Firestore.instance.document("nannies/"+document.documentID).collection("requests").add({"charge": charge , "date": appointment, "fufilled": false, "interview": type, "location": geoPoint});
   }
 }
