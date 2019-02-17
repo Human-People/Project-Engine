@@ -20,8 +20,37 @@ hr {
     margin-top: 0%;
 }
 
-#flexCont {
+.flexCont {
     display: flex;
     justify-content: space-between;
 }
 
+.flexNoStretch {
+    display: flex;
+}
+
+#profilePic {
+    order: 1;
+}
+
+.flexDown {
+    display: flex;
+    flex-direction: column;
+    order: 2;
+}
+
+#uDBS {
+    order: 3;
+}
+
+#uFirstName {
+    order: 4;
+}
+
+#uDesc {
+    order: 5;
+}
+
+#uRate {
+    order: 6;
+}

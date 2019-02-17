@@ -63,33 +63,24 @@
                 </div>
                 </nav>
                 <hr>
-    </section>
-    <div class="flexCont">
-        <section class="section" id="jobsTable">
-            <div class="box">
-                <h2 class="title is-2">Your Jobs</h2>
-                    <table class="table" id="requests">
-                        <thead>
-                            <th>Request Date</th>
-                            <th>Request Accepted?</th>
-                            <th>Location</th>
-                            <th>Accept</th>
-                        </thead>
-                    </table>
-                </div>
-        </section>
+    </section> 
         <section class="section" id="profile">
             <div class="box">
                 <h2 class="title is-2">Your Profile</h2>
-                <img src="<!--TODO: Implement this -->" id="profilePic"> <br />
-                <span id="uFirstName"></span> <br />
-                <span id="uDesc"></span>
+                <div class="flexNoStretch">
+                    <img src="<!--TODO: Implement this -->" id="profilePic">
+                    <div class="flexDown">
+                        <span id="uDBS"></span>
+                        <span id="uFirstName"></span>
+                        <span id="uDesc"></span>
+                        <span id="uRate"></span>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
         <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
-    <script src="lib/js/pull.js"></script>
-    <script src="lib/js/dash.js"></script>
+    <script src="lib/js/account.js"></script>
     </body>
 </html>
