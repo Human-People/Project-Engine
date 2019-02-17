@@ -8,7 +8,7 @@ import 'package:flutter_rating/flutter_rating.dart';
 import 'package:latlong/latlong.dart';
 import 'package:geo_location_finder/geo_location_finder.dart';
 import 'dart:math';
-
+import 'package:card_settings/card_settings.dart';
 
 class HomePage extends StatefulWidget{
   HomePage({this.auth, this.onSignedOut, this.choice});
@@ -219,45 +219,83 @@ class InfoState extends State<InfoScreen>{
           ListTile(
             leading: FlatButton(
               child: Text("Book Interview"),
-              onPressed: () => setInterview(context, widget.location, widget.document, true)
+              onPressed: () => Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (BuildContext context) => setInterview(context, widget.location, widget.document, true)
+                )
+              )
             ),
             trailing: FlatButton(
               child: Text("Book a session"),
-              onPressed: () => setInterview(context, widget.location, widget.document, false)
+              onPressed: () => Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (BuildContext context) => setInterview(context, widget.location, widget.document, false)
+                )
+              )
+                
+              )
             ),
+          ]
+        )
+      );
+  }
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Widget setInterview(BuildContext context, location, DocumentSnapshot document, bool type){
+    DateTime appointment;
+    TimeOfDay startTime = TimeOfDay.now();
+    TimeOfDay endTime;
+    return Form( 
+      key: _formKey,
+      child: Scaffold(
+      appBar: AppBar(title: Text("Book")),
+      body: CardSettings(
+        children: <Widget>[
+          CardSettingsDatePicker(
+            initialValue: DateTime.now(),
+            label: "Date",
+            onChanged: (DateTime date) => appointment = date,
+          ),
+          CardSettingsTimePicker(
+            initialValue: TimeOfDay.now(),
+            label: "Start",
+            onChanged: (TimeOfDay time) => startTime = time,
+          ),
+          CardSettingsTimePicker(
+            initialValue: startTime,
+            label: "End",
+            onChanged: (TimeOfDay time) => endTime = time,
+            visible: !type,
+          ),
+          RaisedButton(
+            child: Text("Submit"),
+            onPressed: () =>sendAppointment(endTime, startTime, appointment, type)
           )
-        ]
-      )
+        ],
+      ) ,
+    )
     );
   }
 
-  setInterview(BuildContext context, location, DocumentSnapshot document, bool type) async{
-    DateTime appointmentDay = await showDatePicker(
-      firstDate: DateTime.now(), 
-      lastDate: DateTime(DateTime.now().year+1), 
-      initialDate: DateTime.now(), 
-      context: context, 
-      initialDatePickerMode: DatePickerMode.day);
+  sendAppointment(TimeOfDay endTime, TimeOfDay startTime, DateTime appointment, type){
+    Duration difference = type == true ? Duration(hours: 0) : DateTime(appointment.year, appointment.month, appointment.day, endTime.hour, endTime.minute).difference(DateTime(appointment.year, appointment.month, appointment.day, startTime.hour, startTime.minute));
 
-    TimeOfDay appointmentTime = await showTimePicker(
-      initialTime: TimeOfDay.now(), 
-      context: context);
+    num charge = type == true ? 0 : widget.document["hour"] * difference.inHours.toDouble();
 
-    GeoPoint geoPoint = GeoPoint(location["latitude"], location["longitude"]);
+    GeoPoint geoPoint = GeoPoint(widget.location["latitude"], widget.location["longitude"]);
 
-    DateTime appointment = DateTime.utc(appointmentDay.year, appointmentDay.month, appointmentDay.day, appointmentTime.hour, appointmentTime.hour);
+    Firestore.instance.document("nannies/"+widget.document.documentID).collection("requests").add({
+      "charge":charge,
+      "date": DateTime(appointment.year, appointment.month, appointment.day, startTime.hour, startTime.minute),
+      "fufilled": false,
+      "interview": type,
+      "location": geoPoint 
+    });
 
-    TimeOfDay appointEnd = type == true ? appointmentTime : await showTimePicker(
-      initialTime: appointmentTime,
-      context: context
-    );
-
-    Duration lengthApp = DateTime(appointment.year, appointment.month, appointment.day, appointEnd.hour, appointEnd.minute).difference(appointment);
-
-
-
-    num charge = type == true ? 0 : document["hour"] * lengthApp.inHours.toDouble();
-
-    Firestore.instance.document("nannies/"+document.documentID).collection("requests").add({"charge": charge , "date": appointment, "fufilled": false, "interview": type, "location": geoPoint});
+    Navigator.of(context).pop();
   }
+  
 }
