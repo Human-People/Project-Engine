@@ -2,17 +2,23 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="lib/css/dash.css">
-    <script src="lib/js/dash.js"></script>
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="lib/css/login.css">
 </head>
 <body>
-    <form onsubmit="signIn()">
-        Login: <input type="text" id="email"> <br />
-        Password: <input type="password" id="password">
-        <button type="submit">Login</button>
-    </form>
+    <div class="box">
+        <h1 class="title is-1">Monkey Minders Development Interface</h1>
+        <h3 class="subtitle is-3">For internal demonstration and testing</h3>
+        <section class="section">
+            <form id="login" onsubmit="return login()">
+            User ID: <input name="ID" type="text" class="input">
+            <button class="button is-primary right-btn" type="submit">Login</button>
+            </form>
+        </section>
+    </div>
+    <script src="lib/js/login.js"></script>
 </body>
 </html>

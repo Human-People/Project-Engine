@@ -1,6 +1,9 @@
 // Initialisation
 var d = new Date(0);
-var uID = "2vlMo1eTAwSVbptjBUuT"
+var cook = document.cookie;
+console.log("cook")
+var uID = cook.split("=")[1]
+console.log(uID)
 var tableR = document.getElementById("requests");
 var tableI = document.getElementById("interviews")
 var config = {
@@ -49,7 +52,11 @@ coll.get().then((querySnapshot) => {
         cell1.innerHTML = reqDate;
         cell2.innerHTML = '<span id="' + doc.id + '">' + reqFill + '</span>';
         cell3.innerHTML = '<a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination='+reqLoc+'">'+reqLoc+'</a>';
-        cell4.innerHTML = '<a><i onclick="acceptJob(\'' + doc.id + '\')" class="fas fa-check-circle"></i></a>'
+        if (reqFill == "Yes") {
+            cell4.innerHTML = '<i style="color: green;" class="fas fa-check-circle"></i>'
+        } else {
+            cell4.innerHTML = '<a><i onclick="acceptJob(\'' + doc.id + '\')" class="fas fa-check-circle"></i></a>'
+        }
     });
 });
 
