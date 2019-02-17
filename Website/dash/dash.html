@@ -14,7 +14,7 @@
         <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="https://monkeyminders.net">
-                    <img src="lib/res/logo.jpg" width="112" height="28">
+                    <img src="lib/img/logo.png" class="logo">
                     </a>
                 
                     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -37,57 +37,54 @@
                     </div>
                 
                     <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                        <div class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link">
-                                    Settings
-                                </a>
-                        
-                                <div class="navbar-dropdown">
-                                    <a class="navbar-item" href="settings.html">
-                                    Settings
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <span class="navbar-item is-hoverable" id="uID">User ID: undefined</span>
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                    <a class="navbar-link">
+                                        Settings
                                     </a>
-                                    <a class="navbar-item" href="account.html">
-                                    Account
-                                    </a>
-                                    <hr class="navbar-divider">
-                                    <a class="navbar-item" onclick="signOut()">
-                                    Sign out
-                                    </a>
-                                </div>
+                                    <div class="navbar-dropdown">
+                                        <a class="navbar-item" id="devToggle" onclick="devToggle()">Dev Mode: On</a>
+                                        <a class="navbar-item" href="settings.html">
+                                        Settings
+                                        </a>
+                                        <a class="navbar-item" href="account.html">
+                                        Account
+                                        </a>
+                                        <hr class="navbar-divider">
+                                        <a class="navbar-item" onclick="signOut()">
+                                        Sign out
+                                        </a>
+                                    </div>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
                 </nav>
+                <hr>
     </section>
-    <hr>
-    <section class="section">
-            <table class="table" id="requests">
-                <thead>
-                    <th>Request Date</th>
-                    <th>Request Fufilled?</th>
-                    <th>Location</th>
-                    <th>Fufil</th>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>16/02/2019</td>
-                    <td>No</td>
-                    <td><a href="http://benji.link/dir1">69 Basingstoke Road</a></td>
-                    <td class="center"><a href="fufil.html"><i class="fas fa-check-circle"></i></a></td>
-                </tr>
-                <tr>
-                    <td>15/02/2019</td>
-                    <td>Yes</td>
-                    <td><a href="http://benji.link/dir2">404 Northumberland Avenue</a></td>
-                    <td class="center"><a href="fufil.html"><i class="fas fa-check-circle"></i></a></td>
-                </tr>
-            </table>
-    </section>
-    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+    <div id="flexCont">
+        <section class="section" id="jobsTable">
+                <table class="table" id="requests">
+                    <thead>
+                        <th>Request Date</th>
+                        <th>Request Fufilled?</th>
+                        <th>Location</th>
+                        <th>Fulfil</th>
+                    </thead>
+                </table>
+        </section>
+        <section class="section" id="profile">
+            <h2>Your Profile</h2>
+            <img src="<!--TODO: Implement this -->">
+            <span id="uFirstName"></span>
+            <span id="uDesc"></span>
+        </section>
+    </div>
+        <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
     <script src="lib/js/pull.js"></script>
+    <script src="lib/js/dash.js"></script>
     </body>
 </html>

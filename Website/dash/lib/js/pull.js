@@ -1,5 +1,11 @@
+// Initialisation
 var d = new Date(0);
+var uID = "2vlMo1eTAwSVbptjBUuT"
 var table = document.getElementById("requests");
+// User ID
+document.getElementById("uID").innerText = "User ID: " + uID
+
+// Firebase 
 var config = {
     apiKey: "AIzaSyAUj5V7i-0jPFfwd4DnTryT5fPGxlxThGE",
     authDomain: "project-engine-5cb03.firebaseapp.com",
@@ -11,7 +17,6 @@ var config = {
 firebase.initializeApp(config);
 var db = firebase.firestore();
 var coll = db.collection("nannies").doc("2vlMo1eTAwSVbptjBUuT").collection("requests");
-
 coll.get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
         var row = table.insertRow(1);
