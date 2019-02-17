@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard | </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <link rel="stylesheet" href="lib/css/dash.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+</head>
+<body>
+    <section class="section" id="navbar">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="https://monkeyminders.net">
+                    <img src="lib/img/logo.png" class="logo">
+                    </a>
+                
+                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-start">
+                    <a class="navbar-item" href="dash.html">
+                        Dashboard
+                    </a>
+                
+                    <a class="navbar-item" href="stats.html">
+                        Stats
+                    </a>
+                    </div>
+                    </div>
+                
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <div class="navbar-item has-dropdown is-hoverable">
+                                    <a class="navbar-link">
+                                        Settings
+                                    </a>
+                                    <div class="navbar-dropdown">
+                                        <a class="navbar-item" href="settings.html">
+                                        Settings
+                                        </a>
+                                        <a class="navbar-item" href="account.html">
+                                        Account
+                                        </a>
+                                        <hr class="navbar-divider">
+                                        <a class="navbar-item" onclick="signOut()">
+                                        Sign out
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </nav>
+                <hr>
+    </section> 
+        <section class="section">
+            <div class="box">
+                <h2 class="title is-2">Nothing Interesting Here</h2>
+                <h5 class="subtitle is-5">Pokey, pokey, fixy, fixy</h5>
+            </div>
+        </section>
+    </div>
+    </body>
+</html>
